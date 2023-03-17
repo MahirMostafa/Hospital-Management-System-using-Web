@@ -1,6 +1,40 @@
-<?php    session_start() ;
+<?php    
+  session_start() ;
  if(isset($_COOKIE['flag']))
 {
+?>
+
+<?php
+$name = $phone = $nid = $email = $dob = $address =  $pass = $gender = "";
+$name = $_SESSION['name'];
+$email= $_SESSION['email'];
+$pass = $_SESSION['pass'];
+if (!empty($name) && (!empty($email)) && (!empty($pass)))
+{
+    $file = fopen('userinfo.txt', 'r');
+  while (($data = fgets($file)) !== false) {
+    $temp = explode('|', $data);
+    if ($name === trim($temp[0]) && $email=== trim($temp[3]) && $pass === trim($temp[6]))
+{
+    $phone = $temp[1];
+    $nid = $temp[2];
+    $dob = $temp[4];
+    $gender = $temp[5];
+    $address = $temp[7];
+    break;
+}
+  }
+}
+
+
+
+
+
+
+
+
+
+
 
 ?>
 <!DOCTYPE html>
@@ -51,14 +85,17 @@
             <table boarder="1" width="" height="">
                 <legend><b>PROFILE </b></legend>
             <tr>
-                <td>Name: Mahir</td>
+                <td><b>Name:</b> <?php echo $name; ?></td>
                 <td rowspan="5"><img src="images/propic.jpg" height="100px" width="100px"> <br>
                     <center><a href="Changepic.php">Change</a></center>
                </td>
             </tr>
-            <tr><td>Email    :Mahir@aiub.edu</td></tr>
-            <tr><td>Gender    :Male</td></tr>
-            <tr><td>Date Of Birth    :19/09/1998</td></tr>
+            <tr><td><b>Email    :</b><?php echo $email; ?></td></tr>
+            <tr><td><b>Phone No :</b><?php echo $phone; ?></td></tr>
+            <tr><td><b>NID      :</b><?php echo $nid; ?></td></tr>
+            <tr><td><b>Gender   :</b><?php echo $gender; ?></td></tr>
+            <tr><td><b>Date Of Birth    :</b><?php echo $dob; ?></td></tr>
+            <tr><td><b>Address   :</b><?php echo $address; ?></td></tr>
             <tr><td><a href="edit_profile.php">Edit profile</a> <br></td></tr>
             </table>
             </fieldset>

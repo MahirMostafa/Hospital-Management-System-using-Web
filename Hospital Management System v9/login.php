@@ -67,6 +67,8 @@ if(isset($_POST['login']))
     {
       $valid = true;
       $_SESSION['name'] = $name ;
+      $_SESSION['email'] = $email;
+      $_SESSION['pass'] = $pass;
       setcookie('flag', 'true', time()+300, '/');
       if(isset($_POST['check']))
       {
